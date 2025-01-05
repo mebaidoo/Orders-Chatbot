@@ -1,0 +1,137 @@
+version: "3.1"
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - hello
+    - hi
+    - hello there
+    - good morning
+    - good evening
+    - hey there
+    - goodmorning
+    - goodevening
+    - good afternoon
+- intent: deny
+  examples: |
+    - [No](no_order)
+    - [no](no_order)
+- intent: talk_to_staff
+  examples: |
+    - [Talk to](talk) staff
+    - I would like to [talk to](talk) someone
+    - I would like to [talk to](talk) a human
+    - I would like to [talk to](talk) staff
+- intent: order_product
+  examples: |
+    - [Yes]{"entity": "order", "value": "order"}
+    - I would like to [order](order) a product
+    - I would like to [buy](order) a product
+    - I would like to [purchase](order) a product
+    - I want to order a product
+    - I want to place an order
+- intent: name_of_product
+  examples: |
+    - I want [FirewoodTypeA](product_name)
+    - I want [FirewoodTypeB](product_name)
+    - I want [FirewoodTypeC](product_name)
+    - [FirewoodTypeA](product_name)
+    - [FirewoodTypeB](product_name)
+    - [FirewoodTypeC](product_name)
+- intent: size
+  examples: |
+    - [40 cm](product_size)
+    - [33 cm](product_size)
+    - [25 cm](product_size)
+    - [40cm](product_size)
+    - [33cm](product_size)
+    - [25cm](product_size)
+    - I want [size 40](product_size)
+    - I want [size 33](product_size)
+    - I want [size 25](product_size)
+- intent: quantity
+  examples: |
+    - [8](product_quantity)
+    - [8](product_quantity) cubic meters
+    - [1](product_quantity)
+    - [2](product_quantity)
+    - [3](product_quantity)
+    - [4](product_quantity)
+    - [5](product_quantity)
+    - [6](product_quantity)
+    - [7](product_quantity)
+    - [9](product_quantity)
+    - [10](product_quantity)
+    - [11](product_quantity)
+    - [12](product_quantity)
+    - [13](product_quantity)
+    - [14](product_quantity)
+    - [15](product_quantity)
+    - [16](product_quantity)
+    - [17](product_quantity)
+    - [18](product_quantity)
+    - [19](product_quantity)
+    - [20](product_quantity)
+    - [21](product_quantity)
+    - [22](product_quantity)
+    - [23](product_quantity)
+    - [24](product_quantity)
+- intent: order_again
+  examples: |
+    - Order a [second product](second_order)
+    - Order a [2nd product](second_order)
+    - Order [second product](second_order)
+    - I want to make a [second order](second_order)
+- intent: order_again_2
+  examples: |
+    - Order a [third product](third_order)
+    - Order a [3rd product](third_order)
+    - Order [third product](third_order)
+    - I want to make a [third order](third_order)
+- intent: provide_shipping_details
+  examples: |
+    - Provide [delivery details](shipping_address)
+    - Provide [shipping details](shipping_address)
+    - I want to provide my [shipping address](shipping_address)
+    - I want to provide my [shipping details](shipping_address)
+- intent: name
+  examples: |
+    - [John Smith](PERSON)
+    - [Maximilian Müller](PERSON)
+    - [Sophia Schmidt](PERSON)
+    - [Alexander Fischer](PERSON)
+    - [Hannah Becker](PERSON)
+    - [Lukas Wagner](PERSON)
+- intent: phone_info
+  examples: |
+    - [+493012345678](phone_number)
+    - [+498998765432](phone_number)
+    - [+49401234567](phone_number)
+    - [+4922187654321](phone_number)
+    - [+49692345678](phone_number)
+    - [004930901720](phone_number)
+    - [6912345677](phone_number)
+- intent: address_info
+  examples: |
+    - Musterstraße 12, 10115 [Berlin](GPE)
+    - Hauptstraße 5, 80331 [München](GPE)
+    - Lindenweg 8, 50667 [Köln](GPE)
+    - Goethestraße 22, 60313 [Frankfurt](GPE) am Main
+    - Bergstraße 3, 20095 [Hamburg](GPE)
+    - Musterstr. 17 12345 [Berlin](GPE)
+- intent: email_info
+  examples: |
+    - [max.mueller@example.de](email_address)
+    - [sophia.schmidt@email.de](email_address)
+    - [alex.fischer@gmx.de](email_address)
+    - [hannah.becker@web.de](email_address)
+    - [lukas.wagner@t-online.de](email_address)
+- synonym: order
+  examples: |
+    - Yes
+- regex: email_address
+  examples: |
+    - \b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+- regex: phone_number
+  examples: |
+    - \b(?:\+49\s?1[5-7]\d{1,4}|0049\s?1[5-7]\d{1,4}|\(0\d{1,4}\)|\d{3,4})[-.\s]?\d{2,4}[-.\s]?\d{2,6}\b

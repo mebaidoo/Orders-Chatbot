@@ -1,0 +1,113 @@
+version: "3.1"
+
+rules:
+
+- rule: intro
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Activate Product Form
+  steps:
+  - intent: order_product
+  - action: product_form
+  - active_loop: product_form
+
+- rule: Calculate Price after Product Form
+  condition:
+  - active_loop: product_form
+  steps:
+  - action: product_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_calculate_price
+  - action: utter_order_again
+
+- rule: Activate Delivery Form
+  steps:
+  - intent: provide_shipping_details
+  - action: delivery_form
+  - active_loop: delivery_form
+
+- rule: Submit Delivery Form
+  condition:
+  - active_loop: delivery_form
+  steps:
+  - action: delivery_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_say_delivery_info
+  - action: utter_order_complete
+  - action: action_send_order_email
+
+- rule: Order Again 2
+  steps:
+  - intent: order_again
+  - action: product_form_two
+  - active_loop: product_form_two
+
+- rule: Order Again 3
+  steps:
+  - intent: order_again_2
+  - action: product_form_three
+  - active_loop: product_form_three
+
+- rule: Calculate Price after 2nd Product Form
+  condition:
+  - active_loop: product_form_two
+  steps:
+  - action: product_form_two
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_calculate_price
+  - action: utter_order_again_2
+
+- rule: Calculate Price after 3rd Product Form
+  condition:
+  - active_loop: product_form_three
+  steps:
+  - action: product_form_three
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_calculate_price
+  - action: utter_take_delivery_info
+  - action: delivery_form
+  - active_loop: delivery_form
+
+- rule: No Order
+  steps:
+  - intent: deny
+  - action: utter_business_info
+  # - action: action_restart_conversation
+  - action: utter_greet_again
+
+- rule: Activate Contact Form
+  steps:
+  - intent: talk_to_staff
+  - action: contact_form
+  - active_loop: contact_form
+
+- rule: Submit Contact Form
+  condition:
+  - active_loop: contact_form
+  steps:
+  - action: contact_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: utter_contact_you
+  - action: action_send_contact_email
+
+- rule: Restart conversation after sending order email
+  steps:
+  - action: action_send_order_email
+  - action: action_restart_conversation
+
+- rule: Restart conversation after sending contact email
+  steps:
+  - action: action_send_contact_email
+  - action: action_restart_conversation

@@ -1,0 +1,450 @@
+version: "3.1"
+
+stories:
+
+- story: order product and send email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: order_product
+    entities:
+    - order: order
+  - action: product_form
+  - active_loop: product_form
+  - slot_was_set:
+    - requested_slot: product_name
+  - intent: name_of_product
+    entities:
+    - product_name: FirewoodTypeA
+  - slot_was_set:
+    - product_name: FirewoodTypeA
+  - action: product_form
+  - slot_was_set:
+    - product_name: FirewoodTypeA
+  - slot_was_set:
+    - requested_slot: product_quantity
+  - intent: quantity
+    entities:
+    - product_quantity: '8'
+  - slot_was_set:
+    - product_quantity: '8'
+  - action: product_form
+  - slot_was_set:
+    - product_quantity: '8'
+  - slot_was_set:
+    - requested_slot: product_size
+  - intent: size
+    entities:
+    - product_size: 40 cm
+  - slot_was_set:
+    - product_size: 40 cm
+  - action: product_form
+  - slot_was_set:
+    - product_size: '40'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_calculate_price
+  - action: utter_order_again
+  - intent: provide_shipping_details
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: customer_name
+  - intent: name
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - action: delivery_form
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - slot_was_set:
+    - requested_slot: phone_number
+  - intent: phone_info
+    entities:
+    - product_name: '492057291047'
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - action: delivery_form
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - slot_was_set:
+    - requested_slot: address
+  - intent: address_info
+    entities:
+    - GPE: Berlin
+  - slot_was_set:
+    - address: Musterstraße 12, 10115 Berlin
+  - action: delivery_form
+  - slot_was_set:
+    - address: Musterstraße 12, 10115 Berlin
+  - slot_was_set:
+    - requested_slot: email_address
+  - intent: email_info
+    entities:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - action: delivery_form
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_say_delivery_info
+  - action: utter_order_complete
+  - action: action_send_order_email
+
+- story: order again 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: order_product
+    entities:
+    - order: order
+  - action: product_form
+  - active_loop: product_form
+  - slot_was_set:
+    - requested_slot: product_name
+  - intent: name_of_product
+    entities:
+    - product_name: FirewoodTypeA
+  - slot_was_set:
+    - product_name: FirewoodTypeA
+  - action: product_form
+  - slot_was_set:
+    - product_name: FirewoodTypeA
+  - slot_was_set:
+    - requested_slot: product_quantity
+  - intent: quantity
+    entities:
+    - product_quantity: '8'
+  - slot_was_set:
+    - product_quantity: '8'
+  - action: product_form
+  - slot_was_set:
+    - product_quantity: '8'
+  - slot_was_set:
+    - requested_slot: product_size
+  - intent: size
+    entities:
+    - product_size: 40 cm
+  - slot_was_set:
+    - product_size: 40 cm
+  - action: product_form
+  - slot_was_set:
+    - product_size: '40'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_calculate_price
+  - action: utter_order_again
+  - intent: order_again
+    entities:
+    - second_order: second product
+  - action: product_form_two
+  - active_loop: product_form_two
+  - slot_was_set:
+    - requested_slot: product_name_2
+  - intent: name_of_product
+    entities:
+    - product_name: FirewoodTypeB
+  - slot_was_set:
+    - product_name_2: FirewoodTypeB
+  - action: product_form_two
+  - slot_was_set:
+    - product_name_2: FirewoodTypeB
+  - slot_was_set:
+    - requested_slot: product_quantity_2
+  - intent: quantity
+    entities:
+    - product_quantity: '9'
+  - slot_was_set:
+    - product_quantity_2: '9'
+  - action: product_form_two
+  - slot_was_set:
+    - product_quantity_2: '9'
+  - slot_was_set:
+    - requested_slot: product_size_2
+  - intent: size
+    entities:
+    - product_size: 33 cm
+  - slot_was_set:
+    - product_size_2: 33 cm
+  - action: product_form_two
+  - slot_was_set:
+    - product_size_2: '33'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_calculate_price
+  - action: utter_order_again_2
+  - intent: provide_shipping_details
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: customer_name
+  - intent: name
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - action: delivery_form
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - slot_was_set:
+    - requested_slot: phone_number
+  - intent: phone_info
+    entities:
+    - product_name: '492057291047'
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - action: delivery_form
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - slot_was_set:
+    - requested_slot: address
+  - intent: address_info
+    entities:
+    - GPE: Berlin
+  - slot_was_set:
+    - address: Musterstraße 12, 10115 Berlin
+  - action: delivery_form
+  - slot_was_set:
+    - address: Musterstraße 12, 10115 Berlin
+  - slot_was_set:
+    - requested_slot: email_address
+  - intent: email_info
+    entities:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - action: delivery_form
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_say_delivery_info
+  - action: utter_order_complete
+  - action: action_send_order_email
+
+- story: order again 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: order_product
+    entities:
+    - order: order
+  - action: product_form
+  - active_loop: product_form
+  - slot_was_set:
+    - requested_slot: product_name
+  - intent: name_of_product
+    entities:
+    - product_name: FirewoodTypeA
+  - slot_was_set:
+    - product_name: FirewoodTypeA
+  - action: product_form
+  - slot_was_set:
+    - product_name: FirewoodTypeA
+  - slot_was_set:
+    - requested_slot: product_quantity
+  - intent: quantity
+    entities:
+    - product_quantity: '8'
+  - slot_was_set:
+    - product_quantity: '8'
+  - action: product_form
+  - slot_was_set:
+    - product_quantity: '8'
+  - slot_was_set:
+    - requested_slot: product_size
+  - intent: size
+    entities:
+    - product_size: 40 cm
+  - slot_was_set:
+    - product_size: 40 cm
+  - action: product_form
+  - slot_was_set:
+    - product_size: '40'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_calculate_price
+  - action: utter_order_again
+  - intent: order_again
+    entities:
+    - second_order: second product
+  - action: product_form_two
+  - active_loop: product_form_two
+  - slot_was_set:
+    - requested_slot: product_name_2
+  - intent: name_of_product
+    entities:
+    - product_name: FirewoodTypeB
+  - slot_was_set:
+    - product_name_2: FirewoodTypeB
+  - action: product_form_two
+  - slot_was_set:
+    - product_name_2: FirewoodTypeB
+  - slot_was_set:
+    - requested_slot: product_quantity_2
+  - intent: quantity
+    entities:
+    - product_quantity: '9'
+  - slot_was_set:
+    - product_quantity_2: '9'
+  - action: product_form_two
+  - slot_was_set:
+    - product_quantity_2: '9'
+  - slot_was_set:
+    - requested_slot: product_size_2
+  - intent: size
+    entities:
+    - product_size: 33 cm
+  - slot_was_set:
+    - product_size_2: 33 cm
+  - action: product_form_two
+  - slot_was_set:
+    - product_size_2: '33'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_calculate_price
+  - action: utter_order_again_2
+  - intent: order_again_2
+    entities:
+    - third_order: third product
+  - action: product_form_three
+  - active_loop: product_form_three
+  - slot_was_set:
+    - requested_slot: product_name_3
+  - intent: name_of_product
+    entities:
+    - product_name: FirewoodTypeC
+  - slot_was_set:
+    - product_name_3: FirewoodTypeC
+  - action: product_form_three
+  - slot_was_set:
+    - product_name_3: FirewoodTypeC
+  - slot_was_set:
+    - requested_slot: product_quantity_3
+  - intent: quantity
+    entities:
+    - product_quantity: '12'
+  - slot_was_set:
+    - product_quantity_3: '12'
+  - action: product_form_three
+  - slot_was_set:
+    - product_quantity_3: '12'
+  - slot_was_set:
+    - requested_slot: product_size_3
+  - intent: size
+    entities:
+    - product_size: 25 cm
+  - slot_was_set:
+    - product_size_3: 25 cm
+  - action: product_form_three
+  - slot_was_set:
+    - product_size_3: '25'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_calculate_price
+  - action: utter_take_delivery_info
+  - action: delivery_form
+  - active_loop: delivery_form
+  - slot_was_set:
+    - requested_slot: customer_name
+  - intent: name
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - action: delivery_form
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - slot_was_set:
+    - requested_slot: phone_number
+  - intent: phone_info
+    entities:
+    - product_name: '492057291047'
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - action: delivery_form
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - slot_was_set:
+    - requested_slot: address
+  - intent: address_info
+    entities:
+    - GPE: Berlin
+  - slot_was_set:
+    - address: Musterstraße 12, 10115 Berlin
+  - action: delivery_form
+  - slot_was_set:
+    - address: Musterstraße 12, 10115 Berlin
+  - slot_was_set:
+    - requested_slot: email_address
+  - intent: email_info
+    entities:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - action: delivery_form
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_say_delivery_info
+  - action: utter_order_complete
+  - action: action_send_order_email
+
+- story: no order
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: deny
+  - action: utter_business_info
+  - action: action_restart_conversation
+  - action: utter_greet_again
+
+- story: talk to staff and send email
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: talk_to_staff
+    entities:
+    - talk: Talk to
+  - action: contact_form
+  - active_loop: contact_form
+  - slot_was_set:
+    - requested_slot: customer_name
+  - intent: name
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - action: contact_form
+  - slot_was_set:
+    - customer_name: Maximilian Müller
+  - slot_was_set:
+    - requested_slot: phone_number
+  - intent: phone_info
+    entities:
+    - phone_number: '492057291047'
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - action: contact_form
+  - slot_was_set:
+    - phone_number: '+492057291047'
+  - slot_was_set:
+    - requested_slot: email_address
+  - intent: email_info
+    entities:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - action: contact_form
+  - slot_was_set:
+    - email_address: max.mueller@example.de
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: utter_contact_you
+  - action: action_send_contact_email

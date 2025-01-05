@@ -1,0 +1,537 @@
+version: '3.1'
+intents:
+- address_info
+- deny
+- email_info
+- greet
+- name
+- name_of_product
+- order_again
+- order_again_2
+- order_product
+- phone_info
+- provide_shipping_details
+- quantity
+- size:
+    ignore_entities:
+    - phone_number
+- talk_to_staff
+actions:
+- utter_greet
+- action_send_contact_email
+- utter_contact_you
+- utter_order_complete
+- action_send_order_email
+- action_calculate_price
+- utter_order_again_2
+- action_say_delivery_info
+- utter_order_again
+- utter_take_delivery_info
+- utter_business_info
+- utter_greet_again
+- utter_ask_product_name
+- utter_ask_product_quantity
+- utter_ask_product_size
+- utter_ask_product_name_2
+- utter_ask_product_quantity_2
+- utter_ask_product_size_2
+- utter_ask_product_name_3
+- utter_ask_product_quantity_3
+- utter_ask_product_size_3
+- utter_price
+- utter_ask_customer_name
+- utter_ask_phone_number
+- utter_ask_address
+- utter_ask_email_address
+- validate_product_form
+- validate_product_form_two
+- validate_product_form_three
+- validate_delivery_form
+- validate_contact_form
+- action_restart_conversation
+entities:
+- email_address
+- phone_number
+- product_name
+- product_size
+- product_quantity
+- talk
+- order
+- no_order
+- PERSON
+- GPE
+- second_order
+- third_order
+- shipping_address
+slots:
+  product_name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: name_of_product
+      not_intent:
+      - phone_info
+      - quantity
+      - size
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form
+  product_quantity:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: quantity
+      not_intent:
+      - phone_info
+      - name_of_product
+      - size
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form
+  product_size:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: size
+      not_intent:
+      - phone_info
+      - name_of_product
+      - quantity
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form
+  product_name_2:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: name_of_product
+      not_intent:
+      - phone_info
+      - quantity
+      - size
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form_two
+  product_quantity_2:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: quantity
+      not_intent:
+      - phone_info
+      - name_of_product
+      - size
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form_two
+  product_size_2:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: size
+      not_intent:
+      - phone_info
+      - name_of_product
+      - quantity
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form_two
+  product_name_3:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: name_of_product
+      not_intent:
+      - phone_info
+      - quantity
+      - size
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form_three
+  product_quantity_3:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: quantity
+      not_intent:
+      - phone_info
+      - name_of_product
+      - size
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form_three
+  product_size_3:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: size
+      not_intent:
+      - phone_info
+      - name_of_product
+      - quantity
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+      conditions:
+      - active_loop: product_form_three
+  customer_name:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: name
+      not_intent:
+      - name_of_product
+      - size
+      - quantity
+      - phone_info
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+  phone_number:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: phone_info
+      not_intent:
+      - name_of_product
+      - size
+      - quantity
+      - name
+      - address_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+  address:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: address_info
+      not_intent:
+      - name_of_product
+      - size
+      - quantity
+      - name
+      - phone_info
+      - email_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+  email_address:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_text
+      intent: email_info
+      not_intent:
+      - name_of_product
+      - size
+      - quantity
+      - name
+      - phone_info
+      - address_info
+      - deny
+      - greet
+      - order_again
+      - order_again_2
+      - order_product
+      - provide_shipping_details
+      - talk_to_staff
+forms:
+  product_form:
+    ignored_intents:
+    - greet
+    - deny
+    - talk_to_staff
+    - order_product
+    - order_again
+    - order_again_2
+    - provide_shipping_details
+    - name
+    - phone_info
+    - email_info
+    - address_info
+    required_slots:
+    - product_name
+    - product_quantity
+    - product_size
+  product_form_two:
+    ignored_intents:
+    - greet
+    - deny
+    - talk_to_staff
+    - order_product
+    - order_again
+    - order_again_2
+    - provide_shipping_details
+    - name
+    - phone_info
+    - email_info
+    - address_info
+    required_slots:
+    - product_name_2
+    - product_quantity_2
+    - product_size_2
+  product_form_three:
+    ignored_intents:
+    - greet
+    - deny
+    - talk_to_staff
+    - order_product
+    - order_again
+    - order_again_2
+    - provide_shipping_details
+    - name
+    - phone_info
+    - email_info
+    - address_info
+    required_slots:
+    - product_name_3
+    - product_quantity_3
+    - product_size_3
+  delivery_form:
+    ignored_intents:
+    - greet
+    - deny
+    - talk_to_staff
+    - order_product
+    - name_of_product
+    - size
+    - quantity
+    - order_again
+    - order_again_2
+    - provide_shipping_details
+    required_slots:
+    - customer_name
+    - phone_number
+    - address
+    - email_address
+  contact_form:
+    ignored_intents:
+    - greet
+    - deny
+    - talk_to_staff
+    - order_product
+    - name_of_product
+    - size
+    - quantity
+    - order_again
+    - order_again_2
+    - provide_shipping_details
+    required_slots:
+    - customer_name
+    - phone_number
+    - email_address
+responses:
+  utter_greet:
+  - text: |
+      Hi, would you like to make an order?
+      Yes
+      No
+      Talk to staff
+
+      Please reply with any of the choices listed.
+  utter_business_info:
+  - text: We are a business that sells and delivers firewood.
+  utter_greet_again:
+  - text: |
+      Would you like to make an order?
+      Yes
+      No
+      Talk to staff
+
+      Please reply with any of the choices listed.
+  utter_ask_product_name:
+  - text: |
+      Which product would you like to order?
+      FirewoodTypeA
+      FirewoodTypeB
+      FirewoodTypeC
+
+      Please reply with any of the product names listed.
+  utter_ask_product_quantity:
+  - text: Full trailers with 8 cubic meters have the best price. However, you can also order different quantities (more or less than 8 cubic meters). How many cubic meters would you like to order? Please provide a number.
+  utter_ask_product_size:
+  - text: |
+      Please indicate the size (in cm) of the wood pieces you want delivered.
+      40 cm
+      33 cm
+      25 cm
+
+      Please reply with any of the product sizes listed.
+  utter_ask_product_name_2:
+  - text: |
+      Which product would you like to order?
+      FirewoodTypeA
+      FirewoodTypeB
+      FirewoodTypeC
+
+      Please reply with any of the product names listed.
+  utter_ask_product_quantity_2:
+  - text: Full trailers with 8 cubic meters have the best price. However, you can also order different quantities (more or less than 8 cubic meters). How many cubic meters would you like to order? Please provide a number.
+  utter_ask_product_size_2:
+  - text: |
+      Please indicate the size (in cm) of the wood pieces you want delivered.
+      40 cm
+      33 cm
+      25 cm
+
+      Please reply with any of the product sizes listed.
+  utter_ask_product_name_3:
+  - text: |
+      Which product would you like to order?
+      FirewoodTypeA
+      FirewoodTypeB
+      FirewoodTypeC
+
+      Please reply with any of the product names listed.
+  utter_ask_product_quantity_3:
+  - text: Full trailers with 8 cubic meters have the best price. However, you can also order different quantities (more or less than 8 cubic meters). How many cubic meters would you like to order? Please provide a number.
+  utter_ask_product_size_3:
+  - text: |
+      Please indicate the size (in cm) of the wood pieces you want delivered.
+      40 cm
+      33 cm
+      25 cm
+
+      Please reply with any of the product sizes listed.
+  utter_price:
+  - text: The total cost based on the product, {product_name}, the quantity ({product_quantity} cubic meters) and the wood piece size ({product_size} cm) you selected is €{price}.
+  utter_order_again:
+  - text: |
+      Do you want to order a second product or do you want to finish the order by providing your delivery information?
+      Order a second product
+      Provide delivery details
+
+      Please reply with any of the choices listed.
+  utter_order_again_2:
+  - text: |
+      Do you want to order a third product or do you want to finish the order by providing your delivery information?
+      Order a third product
+      Provide delivery details
+
+      Please reply with any of the choices listed.
+  utter_take_delivery_info:
+  - text: I will take your delivery information right now.
+  utter_ask_customer_name:
+  - text: Alright! I will begin by taking your name. Please provide your name.
+  utter_ask_phone_number:
+  - text: Please provide the telephone number we can reach you on.
+  utter_ask_address:
+  - text: I will now take your address. Please provide the full address without your name where you would like your order delivered.
+  utter_ask_email_address:
+  - text: Lastly, please provide your email address.
+  utter_order_complete:
+  - text: Thank you for your order! We will contact you within the next 24 hours to arrange the delivery date with you.
+  utter_contact_you:
+  - text: Thank you for providing your contact information! We will contact you within the next 24 hours.
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+# action_restart_conversation not working

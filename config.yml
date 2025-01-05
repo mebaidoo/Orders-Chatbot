@@ -1,0 +1,78 @@
+# The config recipe.
+# https://rasa.com/docs/rasa/model-configuration/
+recipe: default.v1
+
+# The assistant project unique identifier
+# This default value must be replaced with a unique assistant name within your deployment
+assistant_id: 20240809-140501-nullary-camera
+
+# Configuration for Rasa NLU.
+# https://rasa.com/docs/rasa/nlu/components/
+language: en
+
+pipeline:
+# # No configuration for the NLU pipeline was provided. The following default pipeline was used to train your model.
+# # If you'd like to customize it, uncomment and adjust the pipeline.
+# # See https://rasa.com/docs/rasa/tuning-your-model for more information.
+  - name: WhitespaceTokenizer
+  - name: RegexFeaturizer
+  - name: LexicalSyntacticFeaturizer
+  - name: CountVectorsFeaturizer
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  # - name: "CRFEntityExtractor"
+  # - name: custom_components.custom_entity_extractor.CustomEntityExtractor
+  #   keywords:
+  #     talk: ["talk", "talk to", "talk to staff"]
+  #     order: ["order", "buy", "purchase"]
+  #     product_name: ["FirewoodTypeA", "FirewoodTypeB", "FirewoodTypeC"]
+  #     product_size: ["40", "33", "25"]
+  #     another_order: ["order another product", "order again"]
+  #     shipping_address: ["shipping address", "shipping details"]
+  #   product_quantity: (1, 50)
+  #   regex_patterns:
+  #     email_address: ["[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"]
+  #     phone_number: ["^(\\+49|0049|0)?\\s*([1-9]\\d{1,4})\\s*(\\d{1,11})(\\s*\\d{1,11})?$"]
+  - name: "SpacyNLP"
+    # language model to load
+    model: "custom_model/custom_spacy_lg_model"
+    case_sensitive: False
+  - name: SpacyEntityExtractor
+    dimensions: ["PERSON", "GPE", "no_order", "order", "product_name", "product_quantity", "product_size", "second_order", "shipping_address", "talk", "third_order"]
+  - name: DIETClassifier
+    entity_recognition: False
+    epochs: 100
+    constrain_similarities: true
+  - name: RegexEntityExtractor
+    # text will be processed with case insensitive as default
+    case_sensitive: False
+    # use lookup tables to extract entities
+    use_regexes: True
+  - name: EntitySynonymMapper
+  - name: ResponseSelector
+    epochs: 100
+    constrain_similarities: true
+  - name: FallbackClassifier
+    threshold: 0.01
+    ambiguity_threshold: 0.01
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+policies:
+# # No configuration for policies was provided. The following default policies were used to train your model.
+# # If you'd like to customize them, uncomment and adjust the policies.
+# # See https://rasa.com/docs/rasa/policies for more information.
+  - name: MemoizationPolicy
+  - name: RulePolicy
+    core_fallback_threshold: 0.01  # Lower the threshold for core fallback
+    core_fallback_action_name: "action_default_fallback"
+    enable_fallback_prediction: False  # Disable fallback prediction
+  - name: UnexpecTEDIntentPolicy
+    max_history: 5
+    epochs: 100
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true
